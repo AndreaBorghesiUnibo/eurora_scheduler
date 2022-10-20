@@ -1,0 +1,33 @@
+#!/usr/bin/env python
+import pbs
+import sys
+my_paths = ['/opt/pbs/default/python/lib/python25.zip',
+		'/opt/pbs/default/python/lib/python2.5',
+		'/opt/pbs/default/python/lib/python2.5/plat_linux2',
+		'/opt/pbs/default/python/lib/python2.5/lib-tk',
+		'/opt/pbs/default/python/lib/python2.5/lib-dnyload',
+		'/opt/pbs/default/python/lib/python2.5/site-packages']
+
+for my_path in my_paths:
+	if my_path not in sys.path:
+		sys.path.append(my_path)
+import socket
+import os
+
+e=pbs.event()
+j=e.job
+try:
+	s=socket.socket()
+	host=socket.gethostname()
+	port=4998
+	s.connect((host,port))
+	cmd='Update Job;'+j.id
+	s.send(cmd)
+except SystemExit:
+	pass
+except:
+	#os.system("/home/eurora/eurora1/Scheduler\ Eurora/scheduler_26 /home/eurora/eurora1/Scheduler\ Eurora/data/nodi > /log &")
+	pass
+	#j.rerun()
+	#e.reject("%s hook failed with %s." % (e.hook_name,sys.exc_info()[:2]))
+

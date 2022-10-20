@@ -1,0 +1,6 @@
+debug 180
+parallel 2160
+np_longpar 8640
+longpar 8640
+reservation 1
+others 180
